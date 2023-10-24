@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
+using WorkoutTracker.Server.DataAcessLayer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<WorkoutDb>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("WorkoutDb")));
 
 var app = builder.Build();
 
